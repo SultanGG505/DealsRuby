@@ -3,27 +3,19 @@ USE sales;
 
 -- Заполнение таблицы "Товары"
 INSERT INTO Products (product_id, name, price, delivery)
-VALUES
-  (1, 'Ноутбук', 999.99, true),
-  (2, 'Смартфон', 599.99, true),
-  (3, 'Планшет', 399.99, false),
-  (4, 'Телевизор', 1499.99, true),
-  (5, 'Наушники', 149.99, false);
+VALUES (1, 'Product 1', 10.99, 'In Stock'),
+       (2, 'Product 2', 19.99, 'Out of Stock'),
+       (3, 'Product 3', 5.99, 'In Stock');
 
 -- Заполнение таблицы "Заказчики"
-INSERT INTO Customers (customer_id, name)
-VALUES
-    (1, 'ООО "Рога и Копыта"'),
-    (2, 'ИП Иванов'),
-    (3, 'АО "Производство"'),
-    (4, 'Физическое лицо'),
-    (5, 'ООО "Торговля"');
+INSERT INTO Customers (customer_id, company_name, address, email)
+VALUES (1, 'Company 1', 'Address 1', 'email1@example.com'),
+       (2, 'Company 2', 'Address 2', 'email2@example.com'),
+       (3, 'Company 3', 'Address 3', 'email3@example.com');
 
 -- Заполнение таблицы "Сделки"
 INSERT INTO Deals (deal_id, customer_id, product_id, quantity, purchase_date)
-VALUES
-    (1, 1, 2, 5, '2023-05-10'),
-    (2, 3, 4, 2, '2023-05-11'),
-    (3, 2, 1, 1, '2023-05-12'),
-    (4, 4, 3, 3, '2023-05-13'),
-    (5, 5, 5, 10, '2023-05-14');
+VALUES (1, 1, 1, 5, '2023-01-01'),
+       (2, 2, 1, 2, '2023-02-15'),
+       (3, 2, 3, 10, '2023-03-10'),
+       (4, 3, 2, 3, '2023-04-20');

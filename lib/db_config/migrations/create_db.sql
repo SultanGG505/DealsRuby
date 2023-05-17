@@ -1,3 +1,4 @@
-DROP DATABASE sales;
+DROP DATABASE Sales;
 
-CREATE DATABASE sales;
+CREATE DATABASE Sales;
+-- Создание базы данных
