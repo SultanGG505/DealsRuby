@@ -34,8 +34,7 @@ class CustomerListController
   end
 
   def show_modal_edit(current_page, per_page, selected_row)
-    item_num = (current_page - 1) * per_page + selected_row
-    item_id = @state_notifier.get(item_num).id
+    item_id = @state_notifier.get(selected_row).id
 
     controller = CustomerInputFormControllerEdit.new(self, item_id)
     view = CustomerInputForm.new(controller)
@@ -45,8 +44,7 @@ class CustomerListController
 
   def delete_selected(current_page, per_page, selected_row)
     # begin
-      item_num = (current_page - 1) * per_page + selected_row
-      item = @state_notifier.get(item_num)
+    item = @state_notifier.get(selected_row)
       @state_notifier.delete(item)
       @customer_rep.delete(item.id)
     # rescue
