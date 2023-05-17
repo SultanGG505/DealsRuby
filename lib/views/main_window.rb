@@ -2,7 +2,7 @@
 
 require 'glimmer-dsl-libui'
 require_relative 'tab_students'
-require_relative 'customer_view'
+require './lib/customer/customer_view'
 
 class MainWindow
   include Glimmer

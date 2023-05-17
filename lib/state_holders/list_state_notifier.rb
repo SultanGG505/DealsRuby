@@ -37,7 +37,8 @@ class ListStateNotifier
 
   def notify_listeners
     @listeners.each do |listener|
-      listener.update(self)
+      puts @items
+      listener.update(@items)
     end
   end
 end
