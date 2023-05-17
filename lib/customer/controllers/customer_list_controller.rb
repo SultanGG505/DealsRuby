@@ -43,13 +43,14 @@ class CustomerListController
   end
 
   def delete_selected(current_page, per_page, selected_row)
-    # begin
-    item = @state_notifier.get(selected_row)
-      @state_notifier.delete(item)
+    begin
+      item = @state_notifier.get(selected_row)
       @customer_rep.delete(item.id)
-    # rescue
-    #   on_db_conn_error
-    # end
+      @state_notifier.delete(item)
+    rescue
+      api = Win32API.new('user32', 'MessageBox', ['L', 'P', 'P', 'L'], 'I')
+      api.call(0, "Нельзя удалить этого Заказчика, т.к он напрямую связан с сделкой", "Error", 0)
+    end
   end
 
   def refresh_data(page, per_page)
@@ -59,19 +60,16 @@ class CustomerListController
     # rescue
     #   on_db_conn_error
     # end
-    items = @customer_rep.get_list(per_page, page, 'company_name', 'ASC' )
+    items = @customer_rep.get_list(per_page, page, 'company_name', 'ASC')
     @state_notifier.set_all(items)
     @view.update_student_count(@customer_rep.count)
   end
-
-
 
   private
 
   def on_db_conn_error
     api = Win32API.new('user32', 'MessageBox', ['L', 'P', 'P', 'L'], 'I')
     api.call(0, "No connection to DB", "Error", 0)
-    # TODO: Возможность переключения на JSON помимо exit
     exit(false)
   end
 end
