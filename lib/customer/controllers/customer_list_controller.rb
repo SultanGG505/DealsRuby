@@ -49,7 +49,7 @@ class CustomerListController
       @state_notifier.delete(item)
     rescue
       api = Win32API.new('user32', 'MessageBox', ['L', 'P', 'P', 'L'], 'I')
-      api.call(0, "Нельзя удалить этого Заказчика, т.к он напрямую связан с сделкой", "Error", 0)
+      api.call(0,"Cannot delete this Customer(ID = " + item.id.to_s + ") because he is in assosiated with Deal", "Error", 0)
     end
   end
 
