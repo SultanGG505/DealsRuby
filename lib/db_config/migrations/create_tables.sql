@@ -4,7 +4,7 @@ USE Sales;
 
 -- Создание таблицы "Товары"
 CREATE TABLE product (
-                          product_id INT PRIMARY KEY,
+                          product_id INT PRIMARY KEY AUTO_INCREMENT,
                           name VARCHAR(255),
                           price DECIMAL(10,2),
                           delivery VARCHAR(255)
@@ -12,7 +12,7 @@ CREATE TABLE product (
 
 -- Создание таблицы "Заказчики"
 CREATE TABLE customer (
-                           customer_id INT PRIMARY KEY,
+                           customer_id INT PRIMARY KEY AUTO_INCREMENT,
                            company_name VARCHAR(255),
                            address VARCHAR(255),
                            email VARCHAR(255)
@@ -20,7 +20,7 @@ CREATE TABLE customer (
 
 -- Создание таблицы "Сделки"
 CREATE TABLE deal (
-                       deal_id INT PRIMARY KEY,
+                       deal_id INT PRIMARY KEY AUTO_INCREMENT,
                        customer_id INT,
                        product_id INT,
                        quantity INT,
