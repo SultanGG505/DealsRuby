@@ -12,6 +12,8 @@ class CustomerListController
     @state_notifier = ListStateNotifier.new
     @state_notifier.add_listener(@view)
     @customer_rep = CustomerDbDataSource.new
+    @sort_columns = %w[customer_id company_name address email]
+    @sort_by = @sort_columns.first
   end
 
   def on_view_created
@@ -60,9 +62,14 @@ class CustomerListController
     # rescue
     #   on_db_conn_error
     # end
-    items = @customer_rep.get_list(per_page, page, 'company_name', 'ASC')
+    items = @customer_rep.get_list(per_page, page, @sort_by, 'ASC')
     @state_notifier.set_all(items)
     @view.update_student_count(@customer_rep.count)
+  end
+
+  def sort(page, per_page, sort_index)
+    @sort_by = @sort_columns[sort_index]
+    refresh_data(page, per_page)
   end
 
   private

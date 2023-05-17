@@ -37,7 +37,7 @@ class CustomerListView
     customers.each do |customer|
       i += 1
       item_num = ((@current_page - 1) * PAGE_SIZE) + i
-      @items << Struct.new(:№,:id, :название_фирмы, :адрес, :почта).new(item_num, customer.id, customer.company_name, customer.address, customer.email)
+      @items << Struct.new(:№, :id, :название_фирмы, :адрес, :почта).new(item_num, customer.id, customer.company_name, customer.address, customer.email)
     end
 
     @table.model_array = @items
@@ -63,12 +63,31 @@ class CustomerListView
           }
 
           @filter_address = entry {
-            label 'Адресс'
+            label 'Адрес'
+          }
+
+          @filter_email = entry {
+            label 'Почта'
           }
 
         }
-      }
 
+        vertical_box {
+          stretchy false
+          label {
+            text 'Сортировка'
+          }
+
+          combobox { |c|
+            stretchy false
+            items ['ID', 'Имя компании', 'Адрес', 'Почта']
+            selected 0
+            on_selected do
+              @controller.sort(@current_page, PAGE_SIZE, c.selected)
+            end
+          }
+        }
+      }
       # Секция 2
       vertical_box {
         @table = refined_table(
