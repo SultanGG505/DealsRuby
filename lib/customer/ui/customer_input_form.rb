@@ -26,7 +26,7 @@ class CustomerInputForm
         @student_form = form {
           stretchy false
 
-          fields = [[:company_name, 'Заказчик', false], [:address, 'Адрес', false], [:email, 'Почта', false]]
+          fields = [[:company_name, 'Заказчик'], [:address, 'Адрес'], [:email, 'Почта']]
 
           fields.each do |field|
             @entries[field[0]] = entry {
