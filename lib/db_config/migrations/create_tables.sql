@@ -3,7 +3,7 @@
 USE Sales;
 
 -- Создание таблицы "Товары"
-CREATE TABLE Products (
+CREATE TABLE Product (
                           product_id INT PRIMARY KEY,
                           name VARCHAR(255),
                           price DECIMAL(10,2),
@@ -11,7 +11,7 @@ CREATE TABLE Products (
 );
 
 -- Создание таблицы "Заказчики"
-CREATE TABLE Customers (
+CREATE TABLE Customer (
                            customer_id INT PRIMARY KEY,
                            company_name VARCHAR(255),
                            address VARCHAR(255),
@@ -19,7 +19,7 @@ CREATE TABLE Customers (
 );
 
 -- Создание таблицы "Сделки"
-CREATE TABLE Deals (
+CREATE TABLE Deal (
                        deal_id INT PRIMARY KEY,
                        customer_id INT,
                        product_id INT,

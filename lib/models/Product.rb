@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Products
+class Product
   attr_accessor :id, :name, :price, :delivery
   def initialize(id, name, price, delivery)
     @id = id

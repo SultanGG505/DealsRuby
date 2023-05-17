@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Deals
+class Deal
   attr_accessor :id, :quantity, :customer_id, :product_id, :purchase_date
 
   def initialize(id, purchase_date, quantity, customer_id, product_id)

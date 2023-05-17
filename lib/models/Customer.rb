@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Customers
+class Customer
   attr_accessor :id, :company_name, :address, :email
 
   def initialize(id, company_name, address, email)
