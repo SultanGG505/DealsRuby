@@ -35,7 +35,7 @@ class CustomerController
   end
 
   def refresh_data(page, per_page)
-    items = @customer_rep.get_list(per_page, page, 'company_name', 'ASC' )
+    items = @customer_rep.get_list(per_page, page, 'company_name', 'ASC')
     @state_notifier.set_all(items)
     @view.update_student_count(@customer_rep.count)
   end

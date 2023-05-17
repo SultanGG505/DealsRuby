@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Product
-  attr_accessor :id, :name, :price, :delivery
+  attr_reader :id, :name, :price, :delivery
   def initialize(id, name, price, delivery)
     @id = id
     @name = name

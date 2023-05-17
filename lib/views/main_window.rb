@@ -19,9 +19,9 @@ class MainWindow
           CustomerListView.new.create
         }
 
-        tab_item('Вкладка 2') {
-          CustomerView.new.build
-        }
+        # tab_item('Вкладка 2') {
+        #   CustomerView.new.build
+        # }
 
         tab_item('Студенты') {
           @view_tab_students.create
