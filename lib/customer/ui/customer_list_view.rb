@@ -33,8 +33,11 @@ class CustomerListView
   def update(customers)
     @items = []
 
+    i = 0
     customers.each do |customer|
-      @items << Struct.new(:номер, :название_фирмы, :адрес, :почта).new(customer.id, customer.company_name, customer.address, customer.email)
+      i += 1
+      item_num = ((@current_page - 1) * PAGE_SIZE) + i
+      @items << Struct.new(:№,:id, :название_фирмы, :адрес, :почта).new(item_num, customer.id, customer.company_name, customer.address, customer.email)
     end
 
     @table.model_array = @items
@@ -63,7 +66,6 @@ class CustomerListView
             label 'Адресс'
           }
 
-
         }
       }
 
@@ -76,7 +78,8 @@ class CustomerListView
             row_hash['название фирмы'].include?(utf8_query)
           end,
           table_columns: {
-            'номер' => :text,
+            '№' => :text,
+            'ID' => :text,
             'название фирмы' => :text,
             'адрес' => :text,
             'почта' => :text
