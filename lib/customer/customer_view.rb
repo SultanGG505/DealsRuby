@@ -26,7 +26,7 @@ class CustomerView
     update(@items)
     # @controller.on_view_created
     # @controller.refresh_data(@current_page, STUDENTS_PER_PAGE)
-    @controller.on_view_created
+    # @controller.on_view_created
     @controller.refresh_data(@current_page, PAGE_SIZE)
   end
 
@@ -34,7 +34,7 @@ class CustomerView
     @items = []
 
     customers.each do |customer|
-      @items << Struct.new(:номер, :название_фирмы, :адрес, :почта).new(customer.id, customer.company_name, customer.address, customer.email)
+      @items << Struct.new(:номер, :название_фирмы, :адрес, :почта, :действие_1, :действие_2).new(customer.id, customer.company_name, customer.address, customer.email, 'изменить', 'удалить')
     end
 
     @table.model_array = @items
@@ -89,7 +89,9 @@ class CustomerView
             'номер' => :text,
             'название фирмы' => :text,
             'адрес' => :text,
-            'почта' => :text
+            'почта' => :text,
+            'Действие 1' => {button: {on_clicked: ->(row) { @controller.edit(row) }}},
+            'Действие 2' => {button: {on_clicked: ->(row) {@controller.remove(row)}}}
           }
 
         )
