@@ -36,7 +36,7 @@ class CustomerDbDataSource
     results = @client.query(query)
     customers = []
     results.each do |result|
-      customers << Customer.new(result[':customer_id'], result[:'company_name'], result[:'address'], result[:'email'])
+      customers << Customer.new(result[:'customer_id'], result[:'company_name'], result[:'address'], result[:'email'])
     end
     customers
   end
