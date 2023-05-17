@@ -1,48 +1,44 @@
-require 'glimmer-dsl-libui'
-require './lib/models/Customer'
-require_relative 'customer_controller'
+# frozen_string_literal: true
 
-class CustomerView
+require 'glimmer-dsl-libui'
+require_relative '../controllers/customer_list_controller'
+require_relative '../controllers/customer_controller'
+require_relative 'customer_input_form'
+
+class CustomerListView
   include Glimmer
 
-  PAGE_SIZE = 10
+  PAGE_SIZE = 20
 
   def initialize
-    # @controller = TabStudentsController.new(self)
-    @controller = CustomerController.new(self)
-    @items = []
+    @controller = CustomerListController.new(self)
     @current_page = 1
     @total_count = 0
-
-    @items = [
-      Customer.new(1, 'СулМаз', 'ул.Кубанская', 'sultan@gmail.com'),
-      Customer.new(2, 'МазСул', 'ул.Докторов', 'almaz@gmail.com'),
-      Customer.new(3, 'ГазПром', 'ул.Рыбаков', 'almaz@gmail.com'),
-    ]
-
   end
 
   def on_create
-    update(@items)
-    # @controller.on_view_created
-    # @controller.refresh_data(@current_page, STUDENTS_PER_PAGE)
-    # @controller.on_view_created
+    @controller.on_view_created
     @controller.refresh_data(@current_page, PAGE_SIZE)
   end
+
+  # Метод наблюдателя datalist
+  # def on_datalist_changed(new_table)
+  #   arr = new_table.to_2d_array
+  #   arr.map do |row|
+  #     row[3] = [row[3][:value], contact_color(row[3][:type])] unless row[3].nil?
+  #   end
+  #   @table.model_array = arr
+  # end
 
   def update(customers)
     @items = []
 
     customers.each do |customer|
-      @items << Struct.new(:номер, :название_фирмы, :адрес, :почта, :действие_1, :действие_2).new(customer.id, customer.company_name, customer.address, customer.email, 'изменить', 'удалить')
+      @items << Struct.new(:номер, :название_фирмы, :адрес, :почта).new(customer.id, customer.company_name, customer.address, customer.email)
     end
 
     @table.model_array = @items
     @page_label.text = "#{@current_page} / #{(@total_count / PAGE_SIZE.to_f).ceil}"
-  end
-
-  def total_pages
-    (@items.size.to_f / PAGE_SIZE).ceil
   end
 
   def update_student_count(new_cnt)
@@ -50,15 +46,7 @@ class CustomerView
     @page_label.text = "#{@current_page} / #{(@total_count / PAGE_SIZE.to_f).ceil}"
   end
 
-  def selected_index
-    (@current_page - 1) * PAGE_SIZE
-  end
-
-  def displayed_items
-    @items[selected_index, PAGE_SIZE] || []
-  end
-
-  def build
+  def create
     root_container = horizontal_box {
       # Секция 1
       vertical_box {
@@ -67,13 +55,15 @@ class CustomerView
         form {
           stretchy false
 
-          @company_name = entry {
-            label 'название_фирмы'
+          @filter_company_name = entry {
+            label 'Имя компании'
           }
 
-          @address = entry {
-            label 'адрес'
+          @filter_address = entry {
+            label 'Адресс'
           }
+
+
         }
       }
 
@@ -89,11 +79,9 @@ class CustomerView
             'номер' => :text,
             'название фирмы' => :text,
             'адрес' => :text,
-            'почта' => :text,
-            'Действие 1' => {button: {on_clicked: ->(row) { @controller.edit(row) }}},
-            'Действие 2' => {button: {on_clicked: ->(row) {@controller.remove(row)}}}
-          }
-
+            'почта' => :text
+          },
+          per_page: PAGE_SIZE
         )
 
         @pages = horizontal_box {
@@ -104,7 +92,6 @@ class CustomerView
 
             on_clicked do
               @current_page = [@current_page - 1, 1].max
-              # @controller.refresh_data(@current_page, STUDENTS_PER_PAGE)
               @controller.refresh_data(@current_page, PAGE_SIZE)
             end
 
@@ -125,14 +112,33 @@ class CustomerView
       vertical_box {
         stretchy false
 
-        button('Добавить') { stretchy false }
-        button('Изменить') { stretchy false }
-        button('Удалить') { stretchy false }
+        button('Добавить') {
+          stretchy false
+
+          on_clicked {
+            @controller.show_modal_add
+          }
+        }
+        button('Изменить') {
+          stretchy false
+
+          on_clicked {
+            @controller.show_modal_edit(@current_page, PAGE_SIZE, @table.selection) unless @table.selection.nil?
+          }
+        }
+        button('Удалить') {
+          stretchy false
+
+          on_clicked {
+            @controller.delete_selected(@current_page, PAGE_SIZE, @table.selection) unless @table.selection.nil?
+            @controller.refresh_data(@current_page, PAGE_SIZE)
+          }
+        }
         button('Обновить') {
           stretchy false
 
           on_clicked {
-            # @controller.refresh_data(@current_page, STUDENTS_PER_PAGE)
+            @controller.refresh_data(@current_page, PAGE_SIZE)
           }
         }
       }
@@ -140,5 +146,4 @@ class CustomerView
     on_create
     root_container
   end
-
 end

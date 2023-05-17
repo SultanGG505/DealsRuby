@@ -58,7 +58,7 @@ PLATFORMS
   x64-mingw-ucrt
 
 DEPENDENCIES
-  glimmer-dsl-libui
+  glimmer-dsl-libui (~> 0.7.4)
   mysql2
   rubocop
   win32api

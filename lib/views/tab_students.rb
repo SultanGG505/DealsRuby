@@ -3,10 +3,10 @@
 require 'glimmer-dsl-libui'
 require './lib/controllers/tab_students_controller'
 
-class TabStudents
+class TabStudentsView
   include Glimmer
 
-  STUDENTS_PER_PAGE = 20
+  ITEMS_PER_PAGE = 20
 
   def initialize
     @controller = TabStudentsController.new(self)
@@ -16,7 +16,7 @@ class TabStudents
 
   def on_create
     @controller.on_view_created
-    @controller.refresh_data(@current_page, STUDENTS_PER_PAGE)
+    @controller.refresh_data(@current_page, ITEMS_PER_PAGE)
   end
 
   # Метод наблюдателя datalist
@@ -28,7 +28,7 @@ class TabStudents
 
   def update_student_count(new_cnt)
     @total_count = new_cnt
-    @page_label.text = "#{@current_page} / #{(@total_count / STUDENTS_PER_PAGE.to_f).ceil}"
+    @page_label.text = "#{@current_page} / #{(@total_count / ITEMS_PER_PAGE.to_f).ceil}"
   end
 
   def contact_color(type)
@@ -110,7 +110,7 @@ class TabStudents
 
             on_clicked do
               @current_page = [@current_page - 1, 1].max
-              @controller.refresh_data(@current_page, STUDENTS_PER_PAGE)
+              @controller.refresh_data(@current_page, ITEMS_PER_PAGE)
             end
 
           }
@@ -119,8 +119,8 @@ class TabStudents
             stretchy true
 
             on_clicked do
-              @current_page = [@current_page + 1, (@total_count / STUDENTS_PER_PAGE.to_f).ceil].min
-              @controller.refresh_data(@current_page, STUDENTS_PER_PAGE)
+              @current_page = [@current_page + 1, (@total_count / ITEMS_PER_PAGE.to_f).ceil].min
+              @controller.refresh_data(@current_page, ITEMS_PER_PAGE)
             end
           }
         }
@@ -137,7 +137,7 @@ class TabStudents
           stretchy false
 
           on_clicked {
-            @controller.refresh_data(@current_page, STUDENTS_PER_PAGE)
+            @controller.refresh_data(@current_page, ITEMS_PER_PAGE)
           }
         }
       }
