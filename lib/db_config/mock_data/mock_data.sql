@@ -1,4 +1,4 @@
-USE sales;
+USE Sales;
 
 
 -- Заполнение таблицы "Товары"
@@ -9,7 +9,7 @@ VALUES (1, 'Product 1', 10.99, 'In Stock'),
 
 -- Заполнение таблицы "Заказчики"
 INSERT INTO Customer (customer_id, company_name, address, email)
-VALUES (1, 'Company 1', 'Address 1', 'email1@example.com'),
+VALUES (1, 'Company 1300', 'Address 1', 'email1@example.com'),
        (2, 'Company 2', 'Address 2', 'email2@example.com'),
        (3, 'Company 3', 'Address 3', 'email3@example.com');
 
