@@ -3,9 +3,10 @@
 require 'win32api'
 
 class CustomerInputFormControllerEdit
-  def initialize(parent_controller, existing_student_id)
+  def initialize(parent_controller, item_id)
     @parent_controller = parent_controller
-    @existing_student_id = existing_student_id
+    @item_id = item_id
+    @customer_rep = CustomerDbDataSource.new
   end
 
   def set_view(view)
@@ -13,37 +14,34 @@ class CustomerInputFormControllerEdit
   end
 
   def on_view_created
-    begin
-      @student_rep = StudentRepository.new(DBSourceAdapter.new)
-    rescue Mysql2::Error::ConnectionError
-      on_db_conn_error
-    end
-    @existing_student = @student_rep.student_by_id(@existing_student_id)
-    @view.make_readonly(:git, :telegram, :email, :phone)
-    populate_fields(@existing_student)
+    # begin
+    #   @student_rep = StudentRepository.new(DBSourceAdapter.new)
+    # rescue Mysql2::Error::ConnectionError
+    #   on_db_conn_error
+    # end
+
+    @item = @customer_rep.get(@item_id)
+    # @view.make_readonly(:git, :telegram, :email, :phone)
+    populate_fields(@item)
   end
 
-  def populate_fields(student)
-    @view.set_value(:last_name, student.last_name)
-    @view.set_value(:first_name, student.first_name)
-    @view.set_value(:father_name, student.father_name)
-    @view.set_value(:git, student.git)
-    @view.set_value(:telegram, student.telegram)
-    @view.set_value(:email, student.email)
-    @view.set_value(:phone, student.phone)
+  def populate_fields(item)
+    @view.set_value(:company_name, item.company_name)
+    @view.set_value(:address, item.address)
+    @view.set_value(:email, item.email)
   end
 
   def process_fields(fields)
-    begin
-      new_student = Student.from_hash(fields)
+    # begin
+    new_item = Customer.new(@item_id, *fields.values)
 
-      @student_rep.replace_student(@existing_student_id, new_student)
+    @customer_rep.change(new_item)
 
-      @view.close
-    rescue ArgumentError => e
-      api = Win32API.new('user32', 'MessageBox', ['L', 'P', 'P', 'L'], 'I')
-      api.call(0, e.message, 'Error', 0)
-    end
+    @view.close
+    # rescue ArgumentError => e
+    #   api = Win32API.new('user32', 'MessageBox', ['L', 'P', 'P', 'L'], 'I')
+    #   api.call(0, e.message, 'Error', 0)
+    # end
   end
 
   private

@@ -37,7 +37,7 @@ class CustomerListController
     item_num = (current_page - 1) * per_page + selected_row
     item_id = @state_notifier.get(item_num).id
 
-    controller = CustomerInputFormControllerCreate.new(self, item_id)
+    controller = CustomerInputFormControllerEdit.new(self, item_id)
     view = CustomerInputForm.new(controller)
     controller.set_view(view)
     view.create.show
