@@ -13,9 +13,9 @@ class MainWindow
   end
 
   def create
-    window('Библиотека', 900, 200) {
+    window('Sales', 900, 200) {
       tab {
-        tab_item('Авторы') {
+        tab_item('Заказчики') {
           CustomerListView.new.create
         }
 
