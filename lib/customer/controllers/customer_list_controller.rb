@@ -12,8 +12,15 @@ class CustomerListController
     @state_notifier = ListStateNotifier.new
     @state_notifier.add_listener(@view)
     @customer_rep = CustomerDbDataSource.new
+
     @sort_columns = %w[customer_id company_name address email]
     @sort_by = @sort_columns.first
+
+    @address_filter_columns = [nil, true, false]
+    @address_filter = @address_filter_columns.first
+
+    @email_filter_columns = [nil, true, false]
+    @email_filter = @email_filter_columns.first
   end
 
   def on_view_created
@@ -51,7 +58,7 @@ class CustomerListController
       @state_notifier.delete(item)
     rescue
       api = Win32API.new('user32', 'MessageBox', ['L', 'P', 'P', 'L'], 'I')
-      api.call(0,"Cannot delete this Customer(ID = " + item.id.to_s + ") because he is in assosiated with Deal", "Error", 0)
+      api.call(0, "Cannot delete this Customer(ID = " + item.id.to_s + ") because he is in assosiated with Deal", "Error", 0)
     end
   end
 
@@ -62,13 +69,23 @@ class CustomerListController
     # rescue
     #   on_db_conn_error
     # end
-    items = @customer_rep.get_list(per_page, page, @sort_by, 'ASC')
+    items = @customer_rep.get_list(per_page, page, @sort_by, 'ASC', @address_filter, @email_filter)
     @state_notifier.set_all(items)
     @view.update_student_count(@customer_rep.count)
   end
 
   def sort(page, per_page, sort_index)
     @sort_by = @sort_columns[sort_index]
+    refresh_data(page, per_page)
+  end
+
+  def filter_address(page, per_page, filter_index)
+    @address_filter = @address_filter_columns[filter_index]
+    refresh_data(page, per_page)
+  end
+
+  def filter_email(page, per_page, filter_index)
+    @email_filter = @email_filter_columns[filter_index]
     refresh_data(page, per_page)
   end
 

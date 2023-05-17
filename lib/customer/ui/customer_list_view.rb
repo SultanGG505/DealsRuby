@@ -75,6 +75,38 @@ class CustomerListView
         vertical_box {
           stretchy false
           label {
+            text 'Адрес'
+          }
+
+          combobox { |c|
+            stretchy false
+            items ['Неважно', 'Есть', 'Нет']
+            selected 0
+            on_selected do
+              @controller.filter_address(@current_page, PAGE_SIZE, c.selected)
+            end
+          }
+        }
+
+        vertical_box {
+          stretchy false
+          label {
+            text 'Почта'
+          }
+
+          combobox { |c|
+            stretchy false
+            items ['Неважно', 'Есть', 'Нет']
+            selected 0
+            on_selected do
+              @controller.filter_email(@current_page, PAGE_SIZE, c.selected)
+            end
+          }
+        }
+
+        vertical_box {
+          stretchy false
+          label {
             text 'Сортировка'
           }
 
@@ -87,6 +119,10 @@ class CustomerListView
             end
           }
         }
+
+
+
+
       }
       # Секция 2
       vertical_box {

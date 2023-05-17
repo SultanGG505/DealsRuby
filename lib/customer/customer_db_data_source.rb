@@ -1,5 +1,6 @@
 require 'mysql2'
 require_relative '../data_sources/db_client'
+
 class CustomerDbDataSource
   def initialize
     @client = DBClient.instance
@@ -30,9 +31,44 @@ class CustomerDbDataSource
     end
   end
 
-  def get_list(page_size, page_num, sort_field, sort_direction)
+  def get_list(page_size, page_num, sort_field, sort_direction, has_address = nil, has_email = nil)
     offset = (page_num - 1) * page_size
-    query = "SELECT * FROM Customer ORDER BY #{sort_field} #{sort_direction} LIMIT #{page_size} OFFSET #{offset}"
+    # ORDER BY #{sort_field} #{sort_direction} LIMIT #{page_size} OFFSET #{offset}
+    query = "SELECT * FROM Customer"
+
+    if !has_address.nil? or !has_email.nil?
+      query += " Where "
+    end
+    if has_address == true
+      query += "address IS NOT NULL "
+    end
+    if has_address == false
+      query += "address IS NULL "
+    end
+    if !has_address.nil? and !has_email.nil?
+      query += "and "
+    end
+    if has_email == true
+      query += "email IS NOT NULL "
+    end
+    if has_email == false
+      query += "email IS NULL "
+    end
+
+    # if has_address == true and has_email == true
+    #   query += "WHERE address IS NOT NULL and email IS NOT NULL"
+    # end
+    # if has_address == true and has_email == false
+    #   query += "WHERE address IS NOT NULL and email IS NULL"
+    # end
+    # if has_address == false and has_email == true
+    #   query += "WHERE address IS NULL and email IS NOT NULL"
+    # end
+    # if has_address == false and has_email == false
+    #   query += "WHERE address IS NULL and email IS NULL"
+    # end
+
+    query += " ORDER BY #{sort_field} #{sort_direction} LIMIT #{page_size} OFFSET #{offset}"
     results = @client.query(query)
     customers = []
     results.each do |result|
