@@ -5,7 +5,7 @@ require 'win32api'
 class CustomerInputFormControllerCreate
   def initialize(parent_controller)
     @parent_controller = parent_controller
-
+    @customer_rep = CustomerDbDataSource.new
   end
 
   def set_view(view)
@@ -13,26 +13,25 @@ class CustomerInputFormControllerCreate
   end
 
   def on_view_created
-    begin
-      @student_rep = StudentRepository.new(DBSourceAdapter.new)
-    rescue Mysql2::Error::ConnectionError
-      on_db_conn_error
-    end
+    # begin
+    #   @student_rep = StudentRepository.new(DBSourceAdapter.new)
+    # rescue Mysql2::Error::ConnectionError
+    #   on_db_conn_error
+    # end
   end
 
   def process_fields(fields)
     begin
-      last_name = fields.delete(:last_name)
-      first_name = fields.delete(:first_name)
-      father_name = fields.delete(:father_name)
+      company_name = fields.delete(:company_name)
+      address = fields.delete(:address)
+      email = fields.delete(:email)
 
-      return if last_name.nil? || first_name.nil? || father_name.nil?
+      return if company_name.nil? || address.nil? || email.nil?
 
-      student = Student.new(last_name, first_name, father_name, **fields)
-
-      @student_rep.add_student(student)
-
+      item = Customer.new(-1, company_name, address, email)
+      @customer_rep.add(item)
       @view.close
+
     rescue ArgumentError => e
       api = Win32API.new('user32', 'MessageBox', ['L', 'P', 'P', 'L'], 'I')
       api.call(0, e.message, 'Error', 0)
