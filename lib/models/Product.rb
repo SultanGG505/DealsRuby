@@ -4,7 +4,8 @@ class Product
   attr_reader :id, :name, :price, :delivery
 
   def initialize(id, name, price, delivery = nil)
-    validate_all_null(name, price)
+    validate_null('name', name)
+    validate_null('price', price)
     @id = id
     @name = name
     @price = price
@@ -13,11 +14,10 @@ class Product
 
   private
 
-  def validate_all_null(*args)
-    args.each do |arg|
-      if arg.nil?
-        raise ArgumentError, "Argument '#{caller_locations(1, 1)[0].label}' cannot be null"
-      end
+  def validate_null(name, value)
+    if value.nil?
+      raise ArgumentError, "Argument '#{name}' cannot be null"
     end
   end
+
 end

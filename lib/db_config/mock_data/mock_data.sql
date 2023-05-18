@@ -4,16 +4,16 @@ USE Sales;
 -- Заполнение таблицы "Товары"
 INSERT INTO product (name, price, delivery)
 VALUES
-    ('iPhone 12', 999.99, NULL),
-    ('Samsung Galaxy S21', 899.99, 'Express delivery'),
-    ('MacBook Pro', 1999.99, NULL),
-    ('Dell XPS 15', 1599.99, 'Standard delivery'),
-    ('Sony PlayStation 5', 499.99, 'Express delivery'),
-    ('Nintendo Switch', 299.99, NULL),
-    ('Bose QuietComfort 35 II', 349.99, 'Free shipping'),
-    ('Fitbit Versa 3', 199.99, NULL),
-    ('Canon EOS Rebel T7i', 799.99, 'Free shipping'),
-    ('GoPro Hero 9', 449.99, NULL);
+    ('iPhone 12', 999, NULL),
+    ('Samsung Galaxy S21', 899, '+'),
+    ('MacBook Pro', 1999, NULL),
+    ('Dell XPS 15', 1599, '+'),
+    ('Sony PlayStation 5', 499, '+'),
+    ('Nintendo Switch', 299, NULL),
+    ('Bose QuietComfort 35 II', 349, '+'),
+    ('Fitbit Versa 3', 199, NULL),
+    ('Canon EOS Rebel T7i', 799, '+'),
+    ('GoPro Hero 9', 449, NULL);
 
 
 
