@@ -76,7 +76,7 @@ class ProductListView
         vertical_box {
           stretchy false
           label {
-            text 'Адрес'
+            text 'Есть быстрая доставка'
           }
 
           combobox { |c|
