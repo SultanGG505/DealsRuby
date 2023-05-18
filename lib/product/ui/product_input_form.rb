@@ -5,7 +5,6 @@ require_relative '../controllers/product_input_form_controller_create'
 require './lib/models/Product'
 require 'win32api'
 
-
 class ProductInputForm
   include Glimmer
 
@@ -24,6 +23,7 @@ class ProductInputForm
       resizable false
 
       vertical_box {
+
         @student_form = form {
           stretchy false
 
@@ -34,15 +34,26 @@ class ProductInputForm
               label field[1]
             }
           end
+          @entries[:delivery].text = '-'
+          # Изменение значения текстового поля
+          button('Сменить наличие доставки') {
+            # flag = 1 # нажата/стоит +
+            on_clicked {
+              if @entries[:delivery].text == '-'
+                @entries[:delivery].text = '+'
+              else
+                @entries[:delivery].text = '-'
+              end
+            }
+          }
+
         }
 
         button('Сохранить') {
           stretchy false
-
           on_clicked {
             values = @entries.transform_values { |v| v.text.force_encoding("utf-8").strip }
-            values.transform_values! { |v| v.empty? ? nil : v}
-
+            values.transform_values! { |v| v.empty? ? nil : v }
             @controller.process_fields(values)
           }
         }

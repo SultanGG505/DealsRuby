@@ -18,6 +18,7 @@ class ProductInputFormControllerCreate
     # rescue Mysql2::Error::ConnectionError
     #   on_db_conn_error
     # end
+    @view.make_readonly(:delivery)
   end
 
   def process_fields(fields)

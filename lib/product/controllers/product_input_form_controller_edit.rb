@@ -21,7 +21,7 @@ class ProductInputFormControllerEdit
     # end
 
     # @item = @customer_rep.get(@item_id)
-    # @view.make_readonly(:git, :telegram, :email, :phone)
+    @view.make_readonly(:delivery)
     populate_fields(@item)
   end
 
