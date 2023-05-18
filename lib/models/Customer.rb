@@ -5,7 +5,10 @@ class Customer
   attr_reader :id, :company_name, :address, :email
 
   def initialize(id, company_name, address = nil, email = nil)
-    validate_all_null(company_name)
+    validate_null('id', id)
+    validate_null('company_name', company_name)
+    # validate_null('address', address)
+    # validate_null('email', email)
     validate_email(email)
     @id = id
     @company_name = company_name
@@ -15,11 +18,9 @@ class Customer
 
   private
 
-  def validate_all_null(*args)
-    args.each do |arg|
-      if arg.nil?
-        raise ArgumentError, "Argument '#{caller_locations(1, 1)[0].label}' cannot be null"
-      end
+  def validate_null(name,value)
+    if value.nil?
+      raise ArgumentError, "Argument '#{name}' cannot be null"
     end
   end
 

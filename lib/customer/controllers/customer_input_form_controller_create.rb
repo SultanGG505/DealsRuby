@@ -22,13 +22,9 @@ class CustomerInputFormControllerCreate
 
   def process_fields(fields)
     begin
-      company_name = fields.delete(:company_name)
-      address = fields.delete(:address)
-      email = fields.delete(:email)
-
-      return if company_name.nil? || address.nil? || email.nil?
-
-      item = Customer.new(-1, company_name, address, email)
+      puts fields
+      item = Customer.new(-1, *fields.values)
+      puts item
       @customer_rep.add(item)
       @view.close
 
