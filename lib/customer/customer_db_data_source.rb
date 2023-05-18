@@ -9,11 +9,14 @@ class CustomerDbDataSource
   def add(customer)
     query = "INSERT INTO Customer (company_name, address, email) VALUES ('#{customer.company_name}', '#{customer.address}', '#{customer.email}')"
     @client.query(query)
+    customer_id = @client.last_id
+    get(customer_id)
   end
 
   def change(customer)
     query = "UPDATE Customer SET company_name='#{customer.company_name}', address='#{customer.address}', email='#{customer.email}' WHERE customer_id=#{customer.id}"
     @client.query(query)
+    get(customer.id)
   end
 
   def delete(id)

@@ -25,7 +25,8 @@ class CustomerInputFormControllerCreate
       puts fields
       item = Customer.new(-1, *fields.values)
       puts item
-      @customer_rep.add(item)
+      item = @customer_rep.add(item)
+      @parent_controller.state_notifier.add(item)
       @view.close
 
     rescue ArgumentError => e

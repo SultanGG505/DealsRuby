@@ -4,9 +4,13 @@ require './lib/state_holders/list_state_notifier'
 require_relative '../ui/customer_input_form'
 require_relative 'customer_input_form_controller_create'
 require_relative 'customer_input_form_controller_edit'
+require_relative '../customer_db_data_source'
 require 'win32api'
 
 class CustomerListController
+
+  attr_reader :state_notifier;
+
   def initialize(view)
     @view = view
     @state_notifier = ListStateNotifier.new
@@ -43,9 +47,9 @@ class CustomerListController
   end
 
   def show_modal_edit(current_page, per_page, selected_row)
-    item_id = @state_notifier.get(selected_row).id
+    item = @state_notifier.get(selected_row)
 
-    controller = CustomerInputFormControllerEdit.new(self, item_id)
+    controller = CustomerInputFormControllerEdit.new(self, item)
     view = CustomerInputForm.new(controller)
     controller.set_view(view)
     view.create.show
