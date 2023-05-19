@@ -75,7 +75,7 @@ class CustomerListController
     # end
     items = @customer_rep.get_list(per_page, page, @sort_by, 'ASC', @address_filter, @email_filter)
     @state_notifier.set_all(items)
-    @view.update_student_count(@customer_rep.count)
+    @view.update_count(@customer_rep.count)
   end
 
   def sort(page, per_page, sort_index)

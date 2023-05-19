@@ -75,7 +75,7 @@ class ProductListController
     # end
     items = @product_rep.get_list(per_page, page, @sort_by, 'ASC', @delivery_filter)
     @state_notifier.set_all(items)
-    @view.update_student_count(@product_rep.count)
+    @view.update_count(@product_rep.count)
   end
 
   def sort(page, per_page, sort_index)

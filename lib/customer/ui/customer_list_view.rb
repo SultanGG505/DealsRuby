@@ -44,7 +44,7 @@ class CustomerListView
     @page_label.text = "#{@current_page} / #{(@total_count / PAGE_SIZE.to_f).ceil}"
   end
 
-  def update_student_count(new_cnt)
+  def update_count(new_cnt)
     @total_count = new_cnt
     @page_label.text = "#{@current_page} / #{(@total_count / PAGE_SIZE.to_f).ceil}"
   end
