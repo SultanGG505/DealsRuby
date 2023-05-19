@@ -5,13 +5,18 @@ require './lib/customer/ui/customer_view'
 require './lib/customer/ui/customer_list_view'
 # require './lib/product/ui/product_view'
 require './lib/product/ui/product_list_view'
+
+# класс MainWindow, который из файлов реализованных сущностей создаёт
+# их view и отрисовывает их на экране пользователя
+# конкретно сейчас класс отрисовывает сущности Товар и Заказчик
 class MainWindow
   include Glimmer
 
   def initialize
-    # @view_tab_students = TabStudentsView.new
   end
 
+  # метод, в котором происходит создание окон
+  # для сущностей заказчик и товар
   def create
     window('Sales', 1400, 600) {
       tab {
@@ -23,9 +28,6 @@ class MainWindow
           ProductListView.new.create
         }
 
-        # tab_item('Студенты') {
-        #   @view_tab_students.create
-        # }
       }
     }
   end
