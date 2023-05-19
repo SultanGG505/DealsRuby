@@ -55,22 +55,22 @@ class CustomerListView
       vertical_box {
         stretchy false
 
-        form {
-          stretchy false
-
-          @filter_company_name = entry {
-            label 'Имя компании'
-          }
-
-          @filter_address = entry {
-            label 'Адрес'
-          }
-
-          @filter_email = entry {
-            label 'Почта'
-          }
-
-        }
+        # form {
+        #   stretchy false
+        #
+        #   @filter_company_name = entry {
+        #     label 'Имя компании'
+        #   }
+        #
+        #   @filter_address = entry {
+        #     label 'Адрес'
+        #   }
+        #
+        #   @filter_email = entry {
+        #     label 'Почта'
+        #   }
+        #
+        # }
 
         vertical_box {
           stretchy false

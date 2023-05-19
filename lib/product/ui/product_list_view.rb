@@ -56,22 +56,22 @@ class ProductListView
       vertical_box {
         stretchy false
 
-        form {
-          stretchy false
-
-          @filter_company_name = entry {
-            label 'Имя товара'
-          }
-
-          @filter_address = entry {
-            label 'Цена'
-          }
-
-          @filter_email = entry {
-            label 'Есть быстрая доставка'
-          }
-
-        }
+        # form {
+        #   stretchy false
+        #
+        #   @filter_company_name = entry {
+        #     label 'Имя товара'
+        #   }
+        #
+        #   @filter_address = entry {
+        #     label 'Цена'
+        #   }
+        #
+        #   @filter_email = entry {
+        #     label 'Есть быстрая доставка'
+        #   }
+        #
+        # }
 
         vertical_box {
           stretchy false
