@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'glimmer-dsl-libui'
-require_relative 'tab_students'
 require './lib/customer/ui/customer_view'
 require './lib/customer/ui/customer_list_view'
 # require './lib/product/ui/product_view'
@@ -10,7 +9,7 @@ class MainWindow
   include Glimmer
 
   def initialize
-    @view_tab_students = TabStudentsView.new
+    # @view_tab_students = TabStudentsView.new
   end
 
   def create
@@ -24,9 +23,9 @@ class MainWindow
           ProductListView.new.create
         }
 
-        tab_item('Студенты') {
-          @view_tab_students.create
-        }
+        # tab_item('Студенты') {
+        #   @view_tab_students.create
+        # }
       }
     }
   end
