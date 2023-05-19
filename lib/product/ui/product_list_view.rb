@@ -5,32 +5,29 @@ require_relative '../controllers/product_list_controller'
 # require_relative '../controllers/product_controller'
 require_relative 'product_input_form'
 
-
+# Класс, который реализует представление для
+# сущности товар
 class ProductListView
   include Glimmer
 
   PAGE_SIZE = 20
 
+  # при инициализации:
+  # создаётся контроллер для сущности Товар
+  # задаётся актуальная страница на представлении
   def initialize
     @controller = ProductListController.new(self)
     @current_page = 1
     @total_count = 0
   end
 
+  # при создании обновляется информация об сущности
   def on_create
     @controller.on_view_created
     @controller.refresh_data(@current_page, PAGE_SIZE)
   end
 
-  # Метод наблюдателя datalist
-  # def on_datalist_changed(new_table)
-  #   arr = new_table.to_2d_array
-  #   arr.map do |row|
-  #     row[3] = [row[3][:value], contact_color(row[3][:type])] unless row[3].nil?
-  #   end
-  #   @table.model_array = arr
-  # end
-
+  # метод, в котором перезаписываетсся информация о сущности
   def update(products)
     @items = []
 
@@ -55,23 +52,6 @@ class ProductListView
       # Секция 1
       vertical_box {
         stretchy false
-
-        # form {
-        #   stretchy false
-        #
-        #   @filter_company_name = entry {
-        #     label 'Имя товара'
-        #   }
-        #
-        #   @filter_address = entry {
-        #     label 'Цена'
-        #   }
-        #
-        #   @filter_email = entry {
-        #     label 'Есть быстрая доставка'
-        #   }
-        #
-        # }
 
         vertical_box {
           stretchy false

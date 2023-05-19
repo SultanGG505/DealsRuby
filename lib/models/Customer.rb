@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# модель для сущности Заказчик
+# данная модель реализует валидацию данных
 class Customer
   EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
   attr_reader :id, :company_name, :address, :email

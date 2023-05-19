@@ -5,31 +5,29 @@ require_relative '../controllers/customer_list_controller'
 require_relative '../controllers/customer_controller'
 require_relative 'customer_input_form'
 
+# Класс, который реализует представление для
+# сущности товар
 class CustomerListView
   include Glimmer
 
   PAGE_SIZE = 20
 
+  # при инициализации:
+  # создаётся контроллер для сущности Товар
+  # задаётся актуальная страница на представлении
   def initialize
     @controller = CustomerListController.new(self)
     @current_page = 1
     @total_count = 0
   end
 
+  # при создании обновляется информация об сущности
   def on_create
     @controller.on_view_created
     @controller.refresh_data(@current_page, PAGE_SIZE)
   end
 
-  # Метод наблюдателя datalist
-  # def on_datalist_changed(new_table)
-  #   arr = new_table.to_2d_array
-  #   arr.map do |row|
-  #     row[3] = [row[3][:value], contact_color(row[3][:type])] unless row[3].nil?
-  #   end
-  #   @table.model_array = arr
-  # end
-
+  # метод, в котором перезаписываетсся информация о сущности
   def update(customers)
     @items = []
 

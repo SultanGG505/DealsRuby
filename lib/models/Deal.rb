@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# модель для сущности Сделка
+# данная модель реализует валидацию данных(которую нужно переписать на более адекватную)
 class Deal
   attr_reader :id, :quantity, :customer_id, :product_id, :purchase_date
 

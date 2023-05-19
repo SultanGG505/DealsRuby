@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# модель для сущности Товар
+# данная модель реализует валидацию данных
 class Product
   attr_reader :id, :name, :price, :delivery
 

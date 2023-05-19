@@ -1,11 +1,17 @@
 require 'mysql2'
 require_relative '../data_sources/db_client'
 
+# класс, который реализует связь между моделью Товар и базой данных
+# посредством обработки sql-запросов
 class ProductDbDataSource
+  # функция, которая при инициализации класса создаёт экземпляр
+  # DBClient, необходимый для непосредственного подключения к базе данных
+  # с учётом логина и пароля, которым прописан в файле конфигурации БД
   def initialize
     @client = DBClient.instance
   end
 
+  # функция, которая добавляет запись в сущность Товар
   def add(product)
     query = "INSERT INTO Product (name, price, delivery) VALUES ('#{product.name}', '#{product.price}', '#{product.delivery}')"
     @client.query(query)
@@ -13,17 +19,21 @@ class ProductDbDataSource
     get(product_id)
   end
 
+  # функция, которая изменяет запись в сущности товар
   def change(product)
     query = "UPDATE Product SET name='#{product.name}', price='#{product.price}', delivery='#{product.delivery}' WHERE product_id=#{product.id}"
     @client.query(query)
     get(product.id)
   end
 
+  # фунция, которая удаляет запись в сущности товар
   def delete(id)
     query = "DELETE FROM Product WHERE product_id=#{id}"
     @client.query(query)
   end
 
+  # фукнция, которая возвращает всю информацию об
+  # объекте сущности с определённым ID
   def get(id)
     query = "SELECT * FROM Product WHERE product_id=#{id}"
     result = @client.query(query).first
@@ -34,6 +44,8 @@ class ProductDbDataSource
     end
   end
 
+  # функция, которая реализует фильтрацию по наличию или отсутствию
+  # быстрой доставки в сущности Товар
   def get_list(page_size, page_num, sort_field, sort_direction, has_delivery = nil)
     offset = (page_num - 1) * page_size
     # ORDER BY #{sort_field} #{sort_direction} LIMIT #{page_size} OFFSET #{offset}
@@ -58,6 +70,8 @@ class ProductDbDataSource
     products
   end
 
+  # функция, которая возвращает количество записей
+  # в сущности Товар
   def count
     query = 'SELECT COUNT(*) FROM Product'
     result = @client.query(query).first

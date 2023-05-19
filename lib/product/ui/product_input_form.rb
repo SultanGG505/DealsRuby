@@ -5,6 +5,8 @@ require_relative '../controllers/product_input_form_controller_create'
 require './lib/models/Product'
 require 'win32api'
 
+# класс, который реализует модальное окно для сущности товар,
+# которое используется при добавлении или изменении записей через интерфейс
 class ProductInputForm
   include Glimmer
 
