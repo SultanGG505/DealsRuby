@@ -2,6 +2,8 @@
 
 require 'win32api'
 
+# контроллер, которые отвечает за редактирование
+# данных в рамках данной сущности
 class CustomerInputFormControllerEdit
   def initialize(parent_controller, item)
     @parent_controller = parent_controller
@@ -35,13 +37,13 @@ class CustomerInputFormControllerEdit
     begin
       # new_item = Customer.new(@item_id, *fields.values)
       # @customer_rep.change(new_item)
-      item = Customer.new(@item.id,*fields.values)
+      item = Customer.new(@item.id, *fields.values)
       item = @customer_rep.change(item)
       @parent_controller.state_notifier.replace(@item, item)
       @view.close
-      rescue ArgumentError => e
-        api = Win32API.new('user32', 'MessageBox', ['L', 'P', 'P', 'L'], 'I')
-        api.call(0, e.message, 'Error', 0)
+    rescue ArgumentError => e
+      api = Win32API.new('user32', 'MessageBox', ['L', 'P', 'P', 'L'], 'I')
+      api.call(0, e.message, 'Error', 0)
     end
   end
 

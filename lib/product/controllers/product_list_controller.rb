@@ -6,6 +6,8 @@ require_relative 'product_input_form_controller_create'
 require_relative 'product_input_form_controller_edit'
 require_relative '../product_db_data_source'
 
+# контроллер, которые отвечает за редактирование, удаление, добавление
+# данных в рамках данной сущности
 
 require 'win32api'
 

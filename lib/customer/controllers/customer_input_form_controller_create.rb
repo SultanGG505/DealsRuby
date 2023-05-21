@@ -2,6 +2,9 @@
 
 require 'win32api'
 
+# контроллер, которые отвечает за создание
+# данных в рамках данной сущности
+
 class CustomerInputFormControllerCreate
   def initialize(parent_controller)
     @parent_controller = parent_controller
