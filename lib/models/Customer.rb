@@ -20,7 +20,7 @@ class Customer
 
   private
 
-  def validate_null(name,value)
+  def validate_null(name, value)
     if value.nil?
       raise ArgumentError, "Argument '#{name}' cannot be null"
     end
