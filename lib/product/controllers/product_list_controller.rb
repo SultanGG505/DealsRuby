@@ -16,6 +16,7 @@ class ProductListController
   attr_reader :state_notifier;
 
   def initialize(view)
+    LoggerHolder.instance.debug('ProductListController: initialize')
     @view = view
     @state_notifier = ListStateNotifier.new
     @state_notifier.add_listener(@view)
@@ -38,10 +39,12 @@ class ProductListController
   end
 
   def show_view
+    LoggerHolder.instance.debug('ProductListController: show_view')
     @view.create.show
   end
 
   def show_modal_add
+    LoggerHolder.instance.debug('ProductListController: show_modal_add')
     controller = ProductInputFormControllerCreate.new(self)
     view = ProductInputForm.new(controller)
     controller.set_view(view)
@@ -49,8 +52,8 @@ class ProductListController
   end
 
   def show_modal_edit(current_page, per_page, selected_row)
+    LoggerHolder.instance.debug('ProductListController: show_modal_edit')
     item = @state_notifier.get(selected_row)
-
     controller = ProductInputFormControllerEdit.new(self, item)
     view = ProductInputForm.new(controller)
     controller.set_view(view)
@@ -58,6 +61,7 @@ class ProductListController
   end
 
   def delete_selected(current_page, per_page, selected_row)
+    LoggerHolder.instance.debug('ProductListController: delete_selected')
     begin
       item = @state_notifier.get(selected_row)
       @product_rep.delete(item.id)
@@ -69,6 +73,7 @@ class ProductListController
   end
 
   def refresh_data(page, per_page)
+    LoggerHolder.instance.debug('ProductListController: refresh_data')
     # begin
     #   @data_list = @student_rep.paginated_short_students(page, per_page, @data_list)
     #   @view.update_student_count(@student_rep.student_count)
@@ -81,11 +86,13 @@ class ProductListController
   end
 
   def sort(page, per_page, sort_index)
+    LoggerHolder.instance.debug('ProductListController: sort')
     @sort_by = @sort_columns[sort_index]
     refresh_data(page, per_page)
   end
 
   def filter_delivery(page, per_page, filter_index)
+    LoggerHolder.instance.debug('ProductListController: filter_delivery')
     @delivery_filter = @delivery_filter_columns[filter_index]
     refresh_data(page, per_page)
   end
