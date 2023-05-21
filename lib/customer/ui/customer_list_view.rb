@@ -2,7 +2,6 @@
 
 require 'glimmer-dsl-libui'
 require_relative '../controllers/customer_list_controller'
-require_relative '../controllers/customer_controller'
 require_relative 'customer_input_form'
 
 # Класс, который реализует представление для

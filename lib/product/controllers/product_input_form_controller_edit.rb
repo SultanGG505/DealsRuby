@@ -27,7 +27,7 @@ class ProductInputFormControllerEdit
 
   def populate_fields(item)
     @view.set_value(:name, item.name)
-    @view.set_value(:address, item.price)
+    @view.set_value(:price, item.price.to_s)
     @view.set_value(:delivery, item.delivery)
   end
 

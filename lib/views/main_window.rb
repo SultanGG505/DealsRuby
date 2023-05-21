@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'glimmer-dsl-libui'
-require './lib/customer/ui/customer_view'
 require './lib/customer/ui/customer_list_view'
 # require './lib/product/ui/product_view'
 require './lib/product/ui/product_list_view'
