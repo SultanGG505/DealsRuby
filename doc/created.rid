@@ -1,0 +1,33 @@
+Sun, 21 May 2023 22:36:21 +0300
+DiagsPngsWords/DB_struct.png	Wed, 17 May 2023 03:01:22 +0300
+DiagsPngsWords/Структура БД_2.PNG	Thu, 18 May 2023 00:55:31 +0300
+DiagsPngsWords/удобный вид структуры БД.jpg	Wed, 17 May 2023 03:24:54 +0300
+Gemfile	Fri, 19 May 2023 14:35:20 +0300
+Gemfile.lock	Fri, 19 May 2023 14:35:20 +0300
+lib/customer/controllers/customer_input_form_controller_create.rb	Sun, 21 May 2023 22:34:52 +0300
+lib/customer/controllers/customer_input_form_controller_edit.rb	Sun, 21 May 2023 22:34:52 +0300
+lib/customer/controllers/customer_list_controller.rb	Sun, 21 May 2023 22:34:52 +0300
+lib/customer/customer_db_data_source.rb	Fri, 19 May 2023 15:05:44 +0300
+lib/customer/ui/customer_input_form.rb	Fri, 19 May 2023 15:17:36 +0300
+lib/customer/ui/customer_list_view.rb	Sat, 20 May 2023 09:53:37 +0300
+lib/data_sources/db_client.rb	Fri, 19 May 2023 15:17:36 +0300
+lib/data_sources/deal_db_data_source.rb	Wed, 17 May 2023 04:43:15 +0300
+lib/db_config/config.yaml	Wed, 17 May 2023 03:07:20 +0300
+lib/db_config/migrations/create_db.sql	Wed, 17 May 2023 02:58:59 +0300
+lib/db_config/migrations/create_tables.sql	Thu, 18 May 2023 23:55:44 +0300
+lib/db_config/mock_data/mock_data.sql	Thu, 18 May 2023 23:55:44 +0300
+lib/db_config/sales_config.yaml	Wed, 17 May 2023 03:01:13 +0300
+lib/main.rb	Fri, 19 May 2023 14:39:53 +0300
+lib/models/Customer.rb	Fri, 19 May 2023 15:17:36 +0300
+lib/models/Deal.rb	Fri, 19 May 2023 15:17:36 +0300
+lib/models/Product.rb	Fri, 19 May 2023 15:17:36 +0300
+lib/product/controllers/product_input_form_controller_create.rb	Sun, 21 May 2023 22:34:52 +0300
+lib/product/controllers/product_input_form_controller_edit.rb	Sun, 21 May 2023 22:35:12 +0300
+lib/product/controllers/product_list_controller.rb	Sun, 21 May 2023 22:35:12 +0300
+lib/product/product_db_data_source.rb	Fri, 19 May 2023 15:05:44 +0300
+lib/product/ui/product_input_form.rb	Sun, 21 May 2023 22:30:47 +0300
+lib/product/ui/product_list_view.rb	Fri, 19 May 2023 15:11:46 +0300
+lib/state_holders/list_state_notifier.rb	Fri, 19 May 2023 14:48:49 +0300
+lib/views/main_window.rb	Sat, 20 May 2023 09:53:18 +0300
+readme.md	Fri, 19 May 2023 13:20:33 +0300
+sultangg505_gem_deals-0.1.0.gem	Fri, 19 May 2023 12:55:24 +0300
