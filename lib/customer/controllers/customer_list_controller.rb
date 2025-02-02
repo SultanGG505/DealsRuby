@@ -14,7 +14,6 @@ class CustomerListController
   attr_reader :state_notifier;
 
   def initialize(view)
-    LoggerHolder.instance.debug('CustomerListController: initialize')
     @view = view
     @state_notifier = ListStateNotifier.new
     @state_notifier.add_listener(@view)
@@ -39,12 +38,10 @@ class CustomerListController
   end
 
   def show_view
-    LoggerHolder.instance.debug('CustomerListController: show_view')
     @view.create.show
   end
 
   def show_modal_add
-    LoggerHolder.instance.debug('CustomerListController: show_modal_add')
     controller = CustomerInputFormControllerCreate.new(self)
     view = CustomerInputForm.new(controller)
     controller.set_view(view)
@@ -52,8 +49,8 @@ class CustomerListController
   end
 
   def show_modal_edit(current_page, per_page, selected_row)
-    LoggerHolder.instance.debug('CustomerListController: show_modal_edit')
     item = @state_notifier.get(selected_row)
+
     controller = CustomerInputFormControllerEdit.new(self, item)
     view = CustomerInputForm.new(controller)
     controller.set_view(view)
@@ -61,7 +58,6 @@ class CustomerListController
   end
 
   def delete_selected(current_page, per_page, selected_row)
-    LoggerHolder.instance.debug('CustomerListController: delete_selected')
     begin
       item = @state_notifier.get(selected_row)
       @customer_rep.delete(item.id)
@@ -73,8 +69,6 @@ class CustomerListController
   end
 
   def refresh_data(page, per_page)
-    LoggerHolder.instance.debug('CustomerListController: refresh_data')
-
     # begin
     #   @data_list = @student_rep.paginated_short_students(page, per_page, @data_list)
     #   @view.update_student_count(@student_rep.student_count)
@@ -87,19 +81,16 @@ class CustomerListController
   end
 
   def sort(page, per_page, sort_index)
-    LoggerHolder.instance.debug('CustomerListController: sort')
     @sort_by = @sort_columns[sort_index]
     refresh_data(page, per_page)
   end
 
   def filter_address(page, per_page, filter_index)
-    LoggerHolder.instance.debug('CustomerListController: filter_address')
     @address_filter = @address_filter_columns[filter_index]
     refresh_data(page, per_page)
   end
 
   def filter_email(page, per_page, filter_index)
-    LoggerHolder.instance.debug('CustomerListController: filter_email')
     @email_filter = @email_filter_columns[filter_index]
     refresh_data(page, per_page)
   end
